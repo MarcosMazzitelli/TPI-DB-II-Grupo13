@@ -107,3 +107,21 @@ CREATE TABLE HistoriasClinicas (
     Descripcion VARCHAR(255) NOT NULL
 )
 GO
+
+USE DB_II_TURNOS_CLINICA
+
+SELECT * FROM Turnos
+select * from Pacientes
+select * from DiasSemana
+select * from Especialidades
+select * from EspecialidadesXMedicos
+select * from Estados
+select * from HistoriasClinicas
+select * from HorariosDeMedicos
+select * from Medicos
+select * from Pacientes
+select * from Permisos
+select * from TiposTurno
+select * from Turnos
+select * from Usuarios
+
