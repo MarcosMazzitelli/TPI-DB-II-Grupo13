@@ -70,18 +70,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GeneradorDatos.aspx" />
+    <Content Include="Horarios.aspx" />
+    <Content Include="Medicos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\AccesoDatos.cs" />
-    <Compile Include="Clases\GeneradorDatos.cs" />
-    <Compile Include="GeneradorDatos.aspx.cs">
-      <DependentUpon>GeneradorDatos.aspx</DependentUpon>
+    <Compile Include="Horarios.aspx.cs">
+      <DependentUpon>Horarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GeneradorDatos.aspx.designer.cs">
-      <DependentUpon>GeneradorDatos.aspx</DependentUpon>
+    <Compile Include="Horarios.aspx.designer.cs">
+      <DependentUpon>Horarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Medicos.aspx.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medicos.aspx.designer.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MasterPage.Master.cs">
