@@ -23,7 +23,7 @@ namespace TPI_DB_II_Grupo13
             try
             {
                 // Usamos la VISTA para leer los datos
-                datos.setearConsulta("SELECT * FROM V_Medicos_Especialidades");
+                datos.setearConsulta("SELECT * FROM V_Medicos_Especialidades ORDER BY 'Nombre Completo Medico' ASC, Especialidad ASC");
                 datos.ejecutarLectura();
                 GridViewMedicos.DataSource = datos.Lector;
                 GridViewMedicos.DataBind();
