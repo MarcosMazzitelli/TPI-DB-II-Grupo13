@@ -31,6 +31,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Horarios.aspx">Ver Horarios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="TurnosPacientes.aspx">Ver Turnos</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +42,6 @@
         <!-- CONTENIDO DE LA PÁGINA -->
         <div class="container mt-4">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                
             </asp:ContentPlaceHolder>
         </div>
     </form>

@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="Horarios.aspx" />
     <Content Include="Medicos.aspx" />
+    <Content Include="TurnosPacientes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosPacientes.aspx.cs">
+      <DependentUpon>TurnosPacientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TurnosPacientes.aspx.designer.cs">
+      <DependentUpon>TurnosPacientes.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
