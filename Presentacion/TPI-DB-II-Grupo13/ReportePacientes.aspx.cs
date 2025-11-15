@@ -23,7 +23,6 @@ namespace TPI_DB_II_Grupo13
             AccesoDatos datos = new AccesoDatos(); // Usamos tu clase
             try
             {
-                // Usamos la VISTA para leer los datos
                 datos.setearConsulta("SELECT * FROM V_Pacientes_Reporte");
                 datos.ejecutarLectura();
                 
@@ -47,6 +46,14 @@ namespace TPI_DB_II_Grupo13
         {
             GridViewReportePacientes.PageIndex = e.NewPageIndex;
             CargarGrilla();
+        }
+
+        protected void GridViewReportePacientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idPaciente = GridViewReportePacientes.SelectedDataKey.Value.ToString();
+
+            Response.Redirect("HistoriaClinica.aspx?idPaciente=" + idPaciente);
+
         }
     }
 }
