@@ -19,11 +19,21 @@
 
         <Columns>
 
-            <asp:CommandField
-                ShowSelectButton="True"
-                SelectText="Ver Historia"
-                ControlStyle-CssClass="btn btn-info btn-sm"
-                ButtonType="Link" />
+            <asp:TemplateField HeaderText="Acciones">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server"
+                        CommandName="Select"
+                        ShowSelectButton="True"
+                        SelectText="Ver Historia"
+                        ToolTip="Ver Historia Clínica"
+                        ControlStyle-CssClass="btn btn-info btn-sm"
+                        ButtonType="Link"
+                        CssClass="btn btn-info btn-sm">
+                    <i class="bi bi-eye-fill"></i>
+                    </asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <%--Boton modificar estado del turno--%>
 
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
             <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
@@ -34,7 +44,6 @@
             <asp:BoundField DataField="Email" HeaderText="Email" />
             <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
             <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha Nac." DataFormatString="{0:dd/MM/yyyy}" />
-
         </Columns>
 
     </asp:GridView>
