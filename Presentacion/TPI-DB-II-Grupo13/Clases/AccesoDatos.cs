@@ -22,10 +22,10 @@ namespace TPI_DB_II_Grupo13
         public AccesoDatos()
         {//NombreServidor(el punto es genérico) ; NombreBaseDeDatos ; Forma de concetarse(Windows authentication)
             //MARCOS Y JULI
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=DB_II_TURNOS_CLINICA; integrated security=true");
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=DB_II_TURNOS_CLINICA; integrated security=true");
             
             //PEDRO Y EMMA
-            //conexion = new SqlConnection("Server=localhost;Database=DB_II_TURNOS_CLINICA; integrated security=false; user ID=sa; password=BaseDeDatos#2");
+            conexion = new SqlConnection("Server=localhost;Database=DB_II_TURNOS_CLINICA; integrated security=false; user ID=sa; password=BaseDeDatos#2");
             comando = new SqlCommand();//TENEMOS QUE PONER EL ***NOMBRE DE LA DB***
         }
 

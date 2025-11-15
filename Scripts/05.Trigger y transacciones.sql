@@ -25,3 +25,38 @@ BEGIN
 		AND IdEstado = @IdEstadoPendiente;
 END
 GO
+
+CREATE TRIGGER TR_Observacion_Sobreturno ON Turnos
+AFTER INSERT
+AS 
+BEGIN
+	-- Se obtiene el id del turno que se acaba de crear
+	DECLARE @IdTurno INT = (SELECT IdTurno FROM inserted);
+
+	-- Si es sobre turno...
+	IF (SELECT EsSobreTurno FROM inserted) = 1 BEGIN
+		-- Agregar la etiqueta sobreturno en la observacion del turno.
+		UPDATE Turnos SET Observaciones = 'SOBRETURNO: ' + Observaciones WHERE IdTurno = @IdTurno;
+	END
+END
+GO
+
+CREATE TRIGGER TR_No_Modificar_Turnos_Cerrados ON Turnos
+AFTER UPDATE
+AS 
+BEGIN
+	-- Obtengo los Ids de los estados Cancelado o Completado
+	DECLARE @IdEstadoCancelado TINYINT = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Cancelado');
+	DECLARE @IdEstadoCompletado TINYINT = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Completado');
+	
+    -- Si hay al menos un registro (> 0) donde el id de estado del registro corresponda a cancelado o completado...
+	IF (SELECT COUNT(*) FROM inserted I JOIN deleted D ON I.IdTurno = D.IdTurno WHERE D.IdEstado IN (@IdEstadoCancelado, @IdEstadoCompletado)) > 0
+	BEGIN
+        -- Se muestra un error, y se hace rollback, cancelando la actualizacion de los registros.
+		RAISERROR('Los turnos cerrados no pueden ser modificados.', 16, 1);
+		ROLLBACK TRANSACTION;
+		RETURN;
+	END
+
+END
+GO

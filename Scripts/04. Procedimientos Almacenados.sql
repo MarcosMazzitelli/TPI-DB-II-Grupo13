@@ -101,6 +101,13 @@ BEGIN
 				RETURN;
 			END
 
+            IF @Fecha <= GETDATE()
+			BEGIN
+				RAISERROR('No se puede registrar un turno en el pasado.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+
 			-- Validacion que el medico tenga esa fecha y horario asignado con esa especialidad y ese tipo de turno
 			SET DATEFIRST 1;  -- para que el weekday 1 sea lunes.
 			IF (SELECT COUNT (*) FROM HorariosDeMedicos H 
