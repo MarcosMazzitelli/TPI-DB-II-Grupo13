@@ -113,7 +113,7 @@ INSERT INTO HorariosDeMedicos (IdEspecialidadXMedico, IdTipoTurno, IdDiaSemana, 
 (1, 1, 6, '09:00', '11:00'), -- Gomez, Cardio, Sabado (Presencial)
 (5, 1, 6, '09:00', '12:00'); -- Diaz, Pedia, Sabado (Presencial)
 GO
-
+--SET DATEFORMAT YMD; Para que funcione en la compu de Juli. 
 
 INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fecha, Observaciones, EsSobreTurno) VALUES
 (1, 1, 3 , 1, '2024-10-07 09:00:00', 'Control anual.', 0),

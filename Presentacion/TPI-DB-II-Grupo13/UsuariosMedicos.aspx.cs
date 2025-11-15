@@ -54,6 +54,7 @@ namespace TPI_DB_II_Grupo13
             {
                 int idMedico = int.Parse(GridViewMedicosConEstado.SelectedDataKey.Value.ToString());
                 inactivarMedico(idMedico);
+                CargarGrilla();
             }
             catch
             {
@@ -66,7 +67,7 @@ namespace TPI_DB_II_Grupo13
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta(@"UPDATE Usuarios SET Activo = 0 WHERE IdUsuario = (SELECT IdUsuario FROM Medicos WHERE IdMedico = @IdMedico)");
+                datos.setearConsulta("DELETE FROM Medicos WHERE IdMedico = @IdMedico");
                 datos.setearParametro("@IdMedico", IdMedico);
                 datos.ejecutarAccion();
             }
