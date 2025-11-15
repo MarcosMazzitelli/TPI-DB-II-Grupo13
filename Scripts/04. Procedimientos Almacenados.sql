@@ -59,17 +59,11 @@ BEGIN
         THROW 50000, @msg, 1;   -- EL THROW PERMITE LEERLO DESDE C#. INTENTÉ PONER UN CODIGO 400 (BAD REQUEST) PERO MINIMO PIDE 50000
     END CATCH
 END
-
-
-
+GO
 -- --                                  -- IdMedico, IdEspecialidad, IdTipoTurno, IdDiaSemana, HoraEntrada, HoraSalida
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 1, 1, 1, '12:00:00', '13:00:00'
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 1, 2, 1, '12:00:00', '13:00:00'
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 5, 2, 1, '12:00:00', '13:00:00'
-
-
-USE DB_II_TURNOS_CLINICA
-GO
 
 CREATE  PROCEDURE SP_Registrar_Turno
     @IdPaciente INT,
@@ -151,9 +145,3 @@ BEGIN
     END CATCH
 END
 GO
-
-USE DB_II_TURNOS_CLINICA
-GO
-SELECT * from DiasSemana
-
-SELECT DATEPART(WEEKDAY, '2025-11-10 10:30:00');  -- Lunes

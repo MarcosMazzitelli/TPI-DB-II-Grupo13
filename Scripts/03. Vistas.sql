@@ -6,11 +6,19 @@ CREATE VIEW V_Medicos_Especialidades
 AS
 SELECT 
     M.Apellido + ', ' + M.Nombre AS 'Nombre Completo Medico',
+
+	M.FechaNacimiento,
+	dbo.CalcularEdad(M.FechaNacimiento, GETDATE()) AS Edad,
+	M.Email,
+	M.Telefono,
     M.Matricula,
-    E.Descripcion AS Especialidad
+    E.Descripcion AS Especialidad,
+	U.Usuario,
+	U.Activo
 FROM Medicos M
 INNER JOIN EspecialidadesXMedicos EXM ON M.IdMedico = EXM.IdMedico
-INNER JOIN Especialidades E ON EXM.IdEspecialidad = E.IdEspecialidad;
+INNER JOIN Especialidades E ON EXM.IdEspecialidad = E.IdEspecialidad
+INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario;
 GO
 
 -- Horarios completos de los médicos
@@ -65,6 +73,7 @@ SELECT
     P.Email,
     P.Telefono,
     P.FechaNacimiento,
+	dbo.CalcularEdad(P.FechaNacimiento, GETDATE()) AS Edad,
     COUNT (T.IdTurno) AS TurnosTotales,
 	COUNT (CASE WHEN E.Descripcion = 'Cancelado' THEN 1 
 			END) AS TurnosCancelados

@@ -10,8 +10,8 @@ GO
 
 CREATE TABLE Usuarios (
     IdUsuario INT PRIMARY KEY IDENTITY (1, 1),
-    Usuario VARCHAR(28) NOT NULL UNIQUE,
-    Contrasenia VARCHAR(28) NOT NULL,
+    Usuario VARCHAR(35) NOT NULL UNIQUE,
+    Contrasenia VARCHAR(255) NOT NULL,
     Activo BIT NOT NULL,
     IdPermiso INT NOT NULL FOREIGN KEY REFERENCES Permisos(IdPermiso)
 )
@@ -47,10 +47,30 @@ CREATE TABLE Pacientes (
     Apellido VARCHAR(50) NOT NULL,
     Documento VARCHAR(8) NOT NULL UNIQUE,
     FechaNacimiento DATE NOT NULL,
-    Email VARCHAR(100) NULL,
+    Email VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20) NULL,
-    IdUsuario INT NULL FOREIGN KEY REFERENCES Usuarios(IdUsuario)
+    IdUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IdUsuario)
 )
+GO
+
+CREATE FUNCTION dbo.CalcularEdad(@fechaNacimiento DATE, @fechaActual DATE)
+RETURNS INT
+AS
+BEGIN
+	DECLARE @edad INT;
+	-- Calcular la diferencia en años entre las dos fechas
+	SET @edad = DATEDIFF(YEAR, @fechaNacimiento, @fechaActual);
+
+	--restar un año si la persona aun no ha cumplido años en el año actual
+	IF (MONTH (@fechaActual) < MONTH (@fechaNacimiento) )
+	OR (MONTH (@fechaActual) = MONTH(@fechaNacimiento) ) 
+	AND (DAY (@fechaActual) < DAY(@fechaNacimiento) )
+	BEGIN
+	SET @edad = @edad - 1;
+	END;
+
+	RETURN @edad;
+END;
 GO
 
 CREATE TABLE Medicos (
@@ -59,10 +79,10 @@ CREATE TABLE Medicos (
     Apellido VARCHAR(50) NOT NULL,
     Documento VARCHAR(8) NOT NULL UNIQUE,
     FechaNacimiento DATE NOT NULL,
-    Email VARCHAR(100) NULL,
+    Email VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20) NULL,
     Matricula VARCHAR(10) NOT NULL UNIQUE,
-    IdUsuario INT NULL FOREIGN KEY REFERENCES Usuarios(IdUsuario)
+    IdUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IdUsuario)
 )
 GO
 
@@ -107,21 +127,4 @@ CREATE TABLE HistoriasClinicas (
     Descripcion VARCHAR(255) NOT NULL
 )
 GO
-
-USE DB_II_TURNOS_CLINICA
-
-SELECT * FROM Turnos
-select * from Pacientes
-select * from DiasSemana
-select * from Especialidades
-select * from EspecialidadesXMedicos
-select * from Estados
-select * from HistoriasClinicas
-select * from HorariosDeMedicos
-select * from Medicos
-select * from Pacientes
-select * from Permisos
-select * from TiposTurno
-select * from Turnos
-select * from Usuarios
 
