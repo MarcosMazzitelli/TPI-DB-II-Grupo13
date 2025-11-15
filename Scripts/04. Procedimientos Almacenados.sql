@@ -2,7 +2,7 @@ USE DB_II_TURNOS_CLINICA
 GO
 
 -- Alta de horarios x medico
-ALTER PROCEDURE SP_Agregar_Horarios_De_Medicos(
+CREATE PROCEDURE SP_Agregar_Horarios_De_Medicos(
     @IdMedico INT,
     @IdEspecialidad TINYINT,
     @IdTipoTurno TINYINT,
@@ -66,3 +66,94 @@ END
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 1, 1, 1, '12:00:00', '13:00:00'
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 1, 2, 1, '12:00:00', '13:00:00'
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 5, 2, 1, '12:00:00', '13:00:00'
+
+
+USE DB_II_TURNOS_CLINICA
+GO
+
+CREATE  PROCEDURE SP_Registrar_Turno
+    @IdPaciente INT,
+    @IdEspecialidadXMedico INT,
+    @IdTipoTurno TINYINT,
+    @Fecha DATETIME,
+    @Observaciones VARCHAR(255) = NULL,
+    @EsSobreTurno BIT
+AS
+BEGIN
+
+    
+    BEGIN TRY
+
+        BEGIN TRANSACTION;
+			DECLARE @HoraTurno TIME;
+			DECLARE @IdEstadoPendiente TINYINT;
+			DECLARE @IdEstadoCancelado TINYINT;
+			DECLARE @IdEstadoAtendido TINYINT;
+
+			SET @HoraTurno = CONVERT(TIME, @Fecha);
+
+			IF (SELECT COUNT (*) FROM Pacientes WHERE IdPaciente = @IdPaciente) = 0
+			BEGIN
+				RAISERROR('El paciente especificado no existe.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+
+			-- Validacion que el medico tenga esa especialidad asignada.
+			IF (SELECT COUNT (*) FROM EspecialidadesXMedicos WHERE IdEspecialidadXMedico = @IdEspecialidadXMedico) = 0
+			BEGIN
+				RAISERROR('La combinación de médico y especialidad no existe.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+
+			-- Validacion que el medico tenga esa fecha y horario asignado con esa especialidad y ese tipo de turno
+			SET DATEFIRST 1;  -- para que el weekday 1 sea lunes.
+			IF (SELECT COUNT (*) FROM HorariosDeMedicos H 
+				INNER JOIN DiasSemana DS ON H.IdDiaSemana = DS.IdDiaSemana
+				WHERE H.IdEspecialidadXMedico = @IdEspecialidadXMedico
+				  AND H.IdTipoTurno = @IdTipoTurno
+				  AND DATEPART(WEEKDAY, @Fecha) = DS.IdDiaSemana
+				  AND @HoraTurno BETWEEN H.HoraEntrada AND H.HoraSalida) = 0
+			BEGIN
+				RAISERROR('El médico no atiende en el día y hora seleccionados, o el tipo de turno no es correcto.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+		
+			-- Validacion que el medico no tenga un turno asignado en esa fecha y 30 minutos antes y despues
+			DECLARE @FechaInicioRango DATETIME = DATEADD(MINUTE, -29, @Fecha); --  29 min antes que comience el nuevo turno
+			DECLARE @FechaFinRango DATETIME = DATEADD(MINUTE, 29, @Fecha);     --  29  min despues del nuevo turno
+			SET @IdEstadoCancelado = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Cancelado');
+			SET @IdEstadoAtendido = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Atendido');
+
+			IF (SELECT COUNT (*) FROM Turnos T 
+				WHERE T.IdEspecialidadXMedico = @IdEspecialidadXMedico
+				  AND T.Fecha BETWEEN @FechaInicioRango AND @FechaFinRango
+				  AND T.IdEstado NOT IN (@IdEstadoCancelado, @IdEstadoAtendido) ) > 0
+			BEGIN
+				RAISERROR('El médico ya tiene un turno asignado en esa fecha y hora.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+
+			SET @IdEstadoPendiente = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Pendiente');
+
+			INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fecha, Observaciones, EsSobreTurno)
+			VALUES (@IdPaciente, @IdEspecialidadXMedico, @IdEstadoPendiente, @IdTipoTurno, @Fecha, @Observaciones, @EsSobreTurno);
+
+		COMMIT TRANSACTION;
+
+    END TRY
+    BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		THROW;
+    END CATCH
+END
+GO
+
+USE DB_II_TURNOS_CLINICA
+GO
+SELECT * from DiasSemana
+
+SELECT DATEPART(WEEKDAY, '2025-11-10 10:30:00');  -- Lunes
