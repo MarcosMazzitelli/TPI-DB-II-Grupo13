@@ -18,12 +18,14 @@
         <Columns>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button 
-                        ID="btnInactivar" 
-                        runat="server"
-                        Text="Inactivar"
-                        CommandName="Select"
-                        CssClass="btn btn-primary w-100" />
+                 <asp:LinkButton 
+                    ID="btnInactivar"
+                    runat="server"
+                    CommandName="Select"
+                    CssClass="btn btn-outline-danger btn-sm d-flex justify-content-center align-items-center"
+                    ToolTip="Inactivar médico">
+                    <i class="bi bi-trash-fill"></i>
+                </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
