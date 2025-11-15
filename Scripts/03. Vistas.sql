@@ -55,3 +55,24 @@ INNER JOIN EspecialidadesXMedicos EXM ON EXM.IdEspecialidadXMedico = T.IdEspecia
 INNER JOIN Medicos M ON M.IdMedico = EXM.IdMedico
 INNER JOIN Especialidades EP ON EP.IdEspecialidad = EXM.IdEspecialidad;
 GO
+-- Reporte de turnos por paciente
+CREATE VIEW V_Pacientes_Reporte
+AS
+SELECT 
+    P.Nombre,
+    P.Apellido,
+    P.Documento,
+    P.Email,
+    P.Telefono,
+    P.FechaNacimiento,
+    COUNT (T.IdTurno) AS TurnosTotales,
+	COUNT (CASE WHEN E.Descripcion = 'Cancelado' THEN 1 
+			END) AS TurnosCancelados
+FROM Pacientes P
+LEFT JOIN Turnos T ON P.IdPaciente = T.IdPaciente
+LEFT JOIN Estados E ON T.IdEstado = E.IdEstado
+GROUP BY 
+    P.IdPaciente, P.Nombre, P.Apellido, P.Documento, 
+    P.Email, P.Telefono, P.FechaNacimiento;
+GO
+
