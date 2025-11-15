@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HistoriaClinica.aspx" />
     <Content Include="Horarios.aspx" />
     <Content Include="Medicos.aspx" />
     <Content Include="TurnosPacientes.aspx" />
@@ -78,6 +79,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\AccesoDatos.cs" />
+    <Compile Include="HistoriaClinica.aspx.cs">
+      <DependentUpon>HistoriaClinica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistoriaClinica.aspx.designer.cs">
+      <DependentUpon>HistoriaClinica.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Horarios.aspx.cs">
       <DependentUpon>Horarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

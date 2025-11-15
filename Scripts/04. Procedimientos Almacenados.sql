@@ -65,7 +65,7 @@ GO
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 1, 2, 1, '12:00:00', '13:00:00'
 -- -- EXEC SP_Agregar_Horarios_De_Medicos 1, 5, 2, 1, '12:00:00', '13:00:00'
 
-CREATE  PROCEDURE SP_Registrar_Turno
+CREATE PROCEDURE SP_Registrar_Turno
     @IdPaciente INT,
     @IdEspecialidadXMedico INT,
     @IdTipoTurno TINYINT,
@@ -143,5 +143,32 @@ BEGIN
 		ROLLBACK TRANSACTION;
 		THROW;
     END CATCH
+END
+GO
+
+CREATE PROCEDURE SP_Reporte_Historia_Paciente(
+@IdPaciente INT)
+AS
+BEGIN
+
+    SELECT 
+		HC.IdHistoriaClinica AS Id,
+        HC.Fecha,
+        P.Nombre AS NombrePaciente,
+        P.Apellido AS ApellidoPaciente,
+		P.FechaNacimiento AS FechaNacimiento,
+		P.Documento,
+        M.Nombre AS NombreMedico,
+        M.Apellido AS ApellidoMedico,
+        E.Descripcion AS Especialidad,
+        HC.Descripcion AS DescripcionHistoria
+    FROM HistoriasClinicas HC
+    INNER JOIN Pacientes P ON HC.IdPaciente = P.IdPaciente
+    INNER JOIN EspecialidadesXMedicos EXM ON HC.IdEspecialidadXMedico = EXM.IdEspecialidadXMedico
+    INNER JOIN Medicos M ON EXM.IdMedico = M.IdMedico
+    INNER JOIN Especialidades E ON EXM.IdEspecialidad = E.IdEspecialidad
+    WHERE HC.IdPaciente = @IdPaciente
+    ORDER BY 
+        HC.Fecha DESC;
 END
 GO

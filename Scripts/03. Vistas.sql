@@ -67,6 +67,7 @@ GO
 CREATE VIEW V_Pacientes_Reporte
 AS
 SELECT 
+	P.IdPaciente,
     P.Nombre,
     P.Apellido,
     P.Documento,
