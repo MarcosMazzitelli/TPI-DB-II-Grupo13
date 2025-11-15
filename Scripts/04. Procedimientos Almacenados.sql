@@ -32,7 +32,7 @@ BEGIN
         
 
         IF (SELECT COUNT(*) FROM EspecialidadesXMedicos WHERE IdMedico = @IdMedico  AND IdEspecialidad = @IdEspecialidad) = 0 BEGIN
-            RAISERROR('El m�dico no est� dado de alta en esta especialidad.', 16, 1);
+            RAISERROR('El medico no esta dado de alta en esta especialidad.', 16, 1);
         END
         ELSE BEGIN
             DECLARE @IdEspecialidadXMedico INT
@@ -56,7 +56,7 @@ BEGIN
     BEGIN CATCH 
         DECLARE @msg NVARCHAR(4000) = ERROR_MESSAGE();
         -- PRINT @msg;
-        THROW 50000, @msg, 1;   -- EL THROW PERMITE LEERLO DESDE C#. INTENTÉ PONER UN CODIGO 400 (BAD REQUEST) PERO MINIMO PIDE 50000
+        THROW 50000, @msg, 1;   -- EL THROW PERMITE LEERLO DESDE C#. INTENTE PONER UN CODIGO 400 (BAD REQUEST) PERO MINIMO PIDE 50000
     END CATCH
 END
 GO
@@ -96,7 +96,7 @@ BEGIN
 			-- Validacion que el medico tenga esa especialidad asignada.
 			IF (SELECT COUNT (*) FROM EspecialidadesXMedicos WHERE IdEspecialidadXMedico = @IdEspecialidadXMedico) = 0
 			BEGIN
-				RAISERROR('La combinación de médico y especialidad no existe.', 16, 1);
+				RAISERROR('La combinacion de medico y especialidad no existe.', 16, 1);
 				ROLLBACK TRANSACTION;
 				RETURN;
 			END
@@ -110,7 +110,7 @@ BEGIN
 				  AND DATEPART(WEEKDAY, @Fecha) = DS.IdDiaSemana
 				  AND @HoraTurno BETWEEN H.HoraEntrada AND H.HoraSalida) = 0
 			BEGIN
-				RAISERROR('El médico no atiende en el día y hora seleccionados, o el tipo de turno no es correcto.', 16, 1);
+				RAISERROR('El medico no atiende en el dia y hora seleccionados, o el tipo de turno no es correcto.', 16, 1);
 				ROLLBACK TRANSACTION;
 				RETURN;
 			END
@@ -126,7 +126,7 @@ BEGIN
 				  AND T.Fecha BETWEEN @FechaInicioRango AND @FechaFinRango
 				  AND T.IdEstado NOT IN (@IdEstadoCancelado, @IdEstadoAtendido) ) > 0
 			BEGIN
-				RAISERROR('El médico ya tiene un turno asignado en esa fecha y hora.', 16, 1);
+				RAISERROR('El medico ya tiene un turno asignado en esa fecha y hora.', 16, 1);
 				ROLLBACK TRANSACTION;
 				RETURN;
 			END

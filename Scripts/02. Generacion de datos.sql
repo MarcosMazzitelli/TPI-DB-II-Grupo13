@@ -6,7 +6,7 @@ VALUES ('Admin'), ('Medico'), ('Paciente'), ('Recepcionista');
 GO
 
 INSERT INTO Especialidades (Descripcion)
-VALUES ('Cardiología'), ('Dermatología'), ('Traumatología'), ('Pediatría'), ('Clínica Médica');
+VALUES ('Cardiologia'), ('Dermatologia'), ('Traumatologia'), ('Pediatria'), ('Clinica Medica');
 GO
 
 INSERT INTO TiposTurno (Tipo)
@@ -14,7 +14,7 @@ VALUES ('Presencial'), ('Virtual'), ('Urgencia');
 GO
 
 INSERT INTO DiasSemana (Dia)
-VALUES ('Lunes'), ('Martes'), ('Miércoles'), ('Jueves'), ('Viernes'), ('Sábado'), ('Domingo');
+VALUES ('Lunes'), ('Martes'), ('Miercoles'), ('Jueves'), ('Viernes'), ('Sabado'), ('Domingo');
 GO
 
 INSERT INTO Estados (Descripcion)
@@ -84,16 +84,16 @@ GO
 
 --Tablas con relaciones
 INSERT INTO EspecialidadesXMedicos (IdEspecialidad, IdMedico) VALUES
-(1, 1), -- 1: Gomez (Cardiología)
-(5, 1), -- 2: Gomez (Clínica Médica)
-(2, 2), -- 3: Perez (Dermatología)
-(3, 2), -- 4: Perez (Traumatología)
-(4, 3), -- 5: Diaz (Pediatría)
-(5, 3), -- 6: Diaz (Clínica Médica)
-(1, 4), -- 7: Lopez (Cardiología)
-(5, 4), -- 8: Lopez (Clínica Médica)
-(2, 5), -- 9: Sanchez (Dermatología)
-(3, 5); -- 10: Sanchez (Traumatología)
+(1, 1), -- 1: Gomez (Cardiologia)
+(5, 1), -- 2: Gomez (Clinica Medica)
+(2, 2), -- 3: Perez (Dermatologia)
+(3, 2), -- 4: Perez (Traumatologia)
+(4, 3), -- 5: Diaz (Pediatria)
+(5, 3), -- 6: Diaz (Clinica Medica)
+(1, 4), -- 7: Lopez (Cardiologia)
+(5, 4), -- 8: Lopez (Clinica Medica)
+(2, 5), -- 9: Sanchez (Dermatologia)
+(3, 5); -- 10: Sanchez (Traumatologia)
 GO
 
 INSERT INTO HorariosDeMedicos (IdEspecialidadXMedico, IdTipoTurno, IdDiaSemana, HoraEntrada, HoraSalida) VALUES
@@ -101,17 +101,17 @@ INSERT INTO HorariosDeMedicos (IdEspecialidadXMedico, IdTipoTurno, IdDiaSemana, 
 (1, 2, 1, '14:00', '17:00'), -- Gomez, Cardio, Lunes (Virtual)
 (2, 1, 2, '08:00', '11:00'), -- Gomez, Clinica, Martes (Presencial)
 (3, 1, 2, '15:00', '18:00'), -- Perez, Derma, Martes (Presencial)
-(4, 1, 3, '10:00', '14:00'), -- Perez, Trauma, Miércoles (Presencial)
-(4, 3, 3, '14:00', '16:00'), -- Perez, Trauma, Miércoles (Urgencia)
+(4, 1, 3, '10:00', '14:00'), -- Perez, Trauma, Miercoles (Presencial)
+(4, 3, 3, '14:00', '16:00'), -- Perez, Trauma, Miercoles (Urgencia)
 (5, 1, 4, '09:00', '13:00'), -- Diaz, Pedia, Jueves (Presencial)
 (6, 1, 4, '15:00', '18:00'), -- Diaz, Clinica, Jueves (Presencial)
 (7, 1, 5, '08:00', '12:00'), -- Lopez, Cardio, Viernes (Presencial)
 (8, 2, 5, '13:00', '16:00'), -- Lopez, Clinica, Viernes (Virtual)
 (9, 1, 1, '10:00', '13:00'), -- Sanchez, Derma, Lunes (Presencial)
-(9, 1, 3, '10:00', '13:00'), -- Sanchez, Derma, Miércoles (Presencial)
+(9, 1, 3, '10:00', '13:00'), -- Sanchez, Derma, Miercoles (Presencial)
 (10, 1, 5, '15:00', '19:00'), -- Sanchez, Trauma, Viernes (Presencial)
-(1, 1, 6, '09:00', '11:00'), -- Gomez, Cardio, Sábado (Presencial)
-(5, 1, 6, '09:00', '12:00'); -- Diaz, Pedia, Sábado (Presencial)
+(1, 1, 6, '09:00', '11:00'), -- Gomez, Cardio, Sabado (Presencial)
+(5, 1, 6, '09:00', '12:00'); -- Diaz, Pedia, Sabado (Presencial)
 GO
 
 
@@ -119,9 +119,9 @@ INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fe
 (1, 1, 3 , 1, '2024-10-07 09:00:00', 'Control anual.', 0),
 (2, 1, 3, 1, '2024-10-07 09:30:00', 'Dolor de pecho.', 0),
 (3, 1, 2, 1, '2024-10-07 10:00:00', 'Paciente cancela.', 0),
-(4, 1, 3 , 1, '2024-10-07 10:30:00', 'Revisión estudios.', 0),
+(4, 1, 3 , 1, '2024-10-07 10:30:00', 'Revision estudios.', 0),
 (5, 1, 3, 1, '2024-10-14 09:00:00', 'Electrocardiograma.', 0),
-(6, 1, 3, 1, '2024-10-14 09:30:00', 'Control presión.', 0),
+(6, 1, 3, 1, '2024-10-14 09:30:00', 'Control presion.', 0),
 (7, 1, 3, 1, '2024-10-14 10:00:00', 'OK.', 0),
 (8, 1, 2, 1, '2024-10-14 10:30:00', 'Paciente no asiste.', 0),
 (9, 1, 3, 1, '2024-10-21 09:00:00', 'OK.', 0),
@@ -131,7 +131,7 @@ INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fe
 (11, 2, 3, 1, '2024-10-08 08:00:00', 'Chequeo general.', 0),
 (12, 2, 3, 1, '2024-10-08 08:30:00', 'OK.', 0),
 (13, 2, 3, 1, '2024-10-08 09:00:00', 'OK.', 0),
-(14, 2, 3, 1, '2024-10-15 08:00:00', 'Apto físico.', 0),
+(14, 2, 3, 1, '2024-10-15 08:00:00', 'Apto fisico.', 0),
 (15, 2, 3, 1, '2024-10-15 08:30:00', 'OK.', 0),
 (16, 2, 2, 1, '2024-10-15 09:00:00', 'Cancela por viaje.', 0),
 (17, 2, 3, 1, '2024-10-22 08:00:00', 'OK.', 0),
@@ -141,7 +141,7 @@ INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fe
 
 INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fecha, Observaciones, EsSobreTurno) VALUES
 (1, 3, 3, 1, '2024-10-08 15:00:00', 'Control lunar.', 0),
-(3, 3, 3, 1, '2024-10-08 15:30:00', 'Erupción.', 0),
+(3, 3, 3, 1, '2024-10-08 15:30:00', 'Erupcion.', 0),
 (5, 3, 3, 1, '2024-10-08 16:00:00', 'OK.', 0),
 (7, 3, 3, 1, '2024-10-15 15:00:00', 'Control.', 0),
 (9, 3, 3, 1, '2024-10-15 15:30:00', 'OK.', 0),
@@ -158,7 +158,7 @@ INSERT INTO Turnos (IdPaciente, IdEspecialidadXMedico, IdEstado, IdTipoTurno, Fe
 (8, 4, 3, 1, '2024-10-16 10:00:00', 'Placa.', 0),
 (10, 4, 3, 1, '2024-10-16 10:30:00', 'OK.', 0),
 (12, 4, 2, 1, '2024-10-16 11:00:00', 'Cancela.', 0),
-(14, 4, 3, 1, '2024-10-23 10:00:00', 'Muñeca.', 0),
+(14, 4, 3, 1, '2024-10-23 10:00:00', 'Fractura brazo.', 0),
 (16, 4, 2, 1, '2024-10-23 10:30:00', 'Cancela.', 0),
 (18, 4, 3, 1, '2024-10-23 11:00:00', 'OK.', 0);
 GO
@@ -167,54 +167,54 @@ GO
 -- (IDs de EspecialidadXMedico van del 1 al 10)
 
 INSERT INTO HistoriasClinicas (Fecha, IdPaciente, IdEspecialidadXMedico, Descripcion) VALUES
-('2024-10-07 09:00:00', 1, 1, 'Paciente estable. Control de presión arterial OK. Se mantiene medicación.'),
-('2024-10-07 09:30:00', 2, 1, 'Refiere dolor de pecho post-esfuerzo. Se solicita electrocardiograma y análisis.'),
-('2024-10-07 10:30:00', 4, 1, 'Revisión de estudios. Todo en orden.'),
-('2024-10-14 09:00:00', 5, 1, 'Electrocardiograma realizado. Sin anomalías.'),
-('2024-10-14 09:30:00', 6, 1, 'Paciente hipertenso. Se ajusta dosis de medicación.'),
-('2024-10-14 10:00:00', 7, 1, 'Control de rutina. Paciente asintomático.'),
+('2024-10-07 09:00:00', 1, 1, 'Paciente estable. Control de presion arterial OK. Se mantiene medicacion.'),
+('2024-10-07 09:30:00', 2, 1, 'Refiere dolor de pecho post-esfuerzo. Se solicita electrocardiograma y analisis.'),
+('2024-10-07 10:30:00', 4, 1, 'Revision de estudios. Todo en orden.'),
+('2024-10-14 09:00:00', 5, 1, 'Electrocardiograma realizado. Sin anomalias.'),
+('2024-10-14 09:30:00', 6, 1, 'Paciente hipertenso. Se ajusta dosis de medicacion.'),
+('2024-10-14 10:00:00', 7, 1, 'Control de rutina. Paciente asintomatico.'),
 ('2024-10-21 09:00:00', 9, 1, 'Paciente presenta arritmia leve. Se deriva a estudio Holter.'),
 ('2024-10-08 08:00:00', 11, 2, 'Chequeo general anual. Sin particularidades.'),
 ('2024-10-08 08:30:00', 12, 2, 'Paciente con gripe. Se indica reposo y paracetamol.'),
-('2024-10-08 09:00:00', 13, 2, 'Dolor de garganta. Faringitis. Se receta antibiótico.'),
-('2024-10-15 08:00:00', 14, 2, 'Apto físico completado. Sin observaciones.'),
+('2024-10-08 09:00:00', 13, 2, 'Dolor de garganta. Faringitis. Se receta antibiotico.'),
+('2024-10-15 08:00:00', 14, 2, 'Apto fisico completado. Sin observaciones.'),
 ('2024-10-15 08:30:00', 15, 2, 'Control de diabetes. Glucosa estable.'),
-('2024-10-22 08:00:00', 17, 2, 'Paciente refiere estrés laboral. Se recomienda reposo.'),
-('2024-10-22 08:30:00', 18, 2, 'Revisión de análisis de sangre. Colesterol alto.'),
-('2024-10-22 09:00:00', 19, 2, 'Consulta por mareos. Se deriva a neurología.'),
+('2024-10-22 08:00:00', 17, 2, 'Paciente refiere estres laboral. Se recomienda reposo.'),
+('2024-10-22 08:30:00', 18, 2, 'Revision de analisis de sangre. Colesterol alto.'),
+('2024-10-22 09:00:00', 19, 2, 'Consulta por mareos. Se deriva a neurologia.'),
 ('2024-10-08 15:00:00', 1, 3, 'Control de lunar en espalda. Sin cambios.'),
-('2024-10-08 15:30:00', 3, 3, 'Presenta erupción cutánea en brazos. Posible alergia. Se indica crema tópica.'),
-('2024-10-08 16:00:00', 5, 3, 'Acné leve. Se indica tratamiento de limpieza facial.'),
-('2024-10-15 15:00:00', 7, 3, 'Revisión de verruga. Se programa criocirugía.'),
-('2024-10-15 15:30:00', 9, 3, 'Dermatitis atópica. Se refuerza tratamiento.'),
-('2024-10-15 16:00:00', 11, 3, 'Paciente consulta por caída de cabello.'),
-('2024-10-22 15:00:00', 13, 3, 'Quemadura solar leve. Se indica hidratación.'),
-('2024-10-22 16:00:00', 17, 3, 'Urticaria. Se receta antihistamínico.'),
+('2024-10-08 15:30:00', 3, 3, 'Presenta erupcion cutanea en brazos. Posible alergia. Se indica crema topica.'),
+('2024-10-08 16:00:00', 5, 3, 'Acne leve. Se indica tratamiento de limpieza facial.'),
+('2024-10-15 15:00:00', 7, 3, 'Revision de verruga. Se programa criocirugia.'),
+('2024-10-15 15:30:00', 9, 3, 'Dermatitis atopica. Se refuerza tratamiento.'),
+('2024-10-15 16:00:00', 11, 3, 'Paciente consulta por caida de cabello.'),
+('2024-10-22 15:00:00', 13, 3, 'Quemadura solar leve. Se indica hidratacion.'),
+('2024-10-22 16:00:00', 17, 3, 'Urticaria. Se receta antihistaminico.'),
 ('2024-10-09 10:00:00', 2, 4, 'Dolor en rodilla derecha. Se sospecha esguince. Reposo.'),
-('2024-10-09 10:30:00', 4, 4, 'Control post-yeso. Fractura consolidada. Inicia kinesiología.'),
+('2024-10-09 10:30:00', 4, 4, 'Control post-yeso. Fractura consolidada. Inicia kinesiologia.'),
 ('2024-10-09 11:00:00', 6, 4, 'Torcedura de tobillo. Se venda y se indica antiinflamatorio.'),
-('2024-10-16 10:00:00', 8, 4, 'Revisión de radiografía de muñeca. Sin fractura.'),
+('2024-10-16 10:00:00', 8, 4, 'Revision de radiografia de brazo. Sin fractura.'),
 ('2024-10-16 10:30:00', 10, 4, 'Control de hombro. Movilidad reducida.'),
 ('2024-10-23 10:00:00', 14, 4, 'Dolor lumbar (lumbalgia). Se indica reposo y calor.'),
-('2024-10-23 11:00:00', 18, 4, 'Paciente derivado por Clínica Médica. OK.'),
-('2024-10-10 09:00:00', 19, 5, 'Control pediátrico 2 años. Desarrollo normal.'),
+('2024-10-23 11:00:00', 18, 4, 'Paciente derivado por Clinica Medica. OK.'),
+('2024-10-10 09:00:00', 19, 5, 'Control pediatrico 10 meses. Desarrollo normal.'),
 ('2024-10-10 09:30:00', 20, 5, 'Calendario de vacunas completo.'),
-('2024-10-10 10:00:00', 12, 5, 'Niño con fiebre alta. Otitis. Se receta antibiótico.'),
+('2024-10-10 10:00:00', 12, 5, 'Bebe con fiebre alta. Otitis. Se receta antibiotico.'),
 ('2024-10-17 09:00:00', 14, 5, 'Control de peso y talla. OK.'),
 ('2024-10-17 09:30:00', 16, 5, 'Anginas. Se indica reposo.'),
 ('2024-10-17 10:00:00', 18, 5, 'Paciente con tos y mocos. Bronquiolitis leve.'),
 ('2024-10-24 09:00:00', 19, 5, 'Control. OK.'),
-('2024-10-24 10:00:00', 12, 5, 'Revisión de otitis. Paciente recuperado.'),
-('2024-10-11 08:00:00', 1, 7, 'Control cardiológico. OK.'),
-('2024-10-11 08:30:00', 3, 7, 'Presión arterial normal.'),
-('2024-10-11 09:00:00', 5, 7, 'Revisión pre-quirúrgica. Apto.'),
+('2024-10-24 10:00:00', 12, 5, 'Revision de otitis. Paciente recuperado.'),
+('2024-10-11 08:00:00', 1, 7, 'Control cardiologico. OK.'),
+('2024-10-11 08:30:00', 3, 7, 'presion arterial normal.'),
+('2024-10-11 09:00:00', 5, 7, 'Revision pre-quirurgica. Apto.'),
 ('2024-10-18 08:00:00', 7, 7, 'OK.'),
 ('2024-10-18 08:30:00', 9, 7, 'OK.'),
 ('2024-10-18 09:00:00', 11, 7, 'OK.'),
 ('2024-10-25 08:30:00', 15, 7, 'OK.'),
 ('2024-10-25 09:00:00', 17, 7, 'OK.'),
-('2024-10-11 15:00:00', 2, 10, 'Colocación de yeso por fisura en muñeca.'),
-('2024-10-11 15:30:00', 4, 10, 'Revisión de placa. OK.'),
+('2024-10-11 15:00:00', 2, 10, 'Colocacion de yeso por fisura en brazo.'),
+('2024-10-11 15:30:00', 4, 10, 'Revision de placa. OK.'),
 ('2024-10-11 16:00:00', 6, 10, 'OK.'),
 ('2024-10-18 15:00:00', 8, 10, 'OK.'),
 ('2024-10-18 15:30:00', 10, 10, 'OK.'),

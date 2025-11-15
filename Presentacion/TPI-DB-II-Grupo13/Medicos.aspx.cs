@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -25,7 +26,11 @@ namespace TPI_DB_II_Grupo13
                 // Usamos la VISTA para leer los datos
                 datos.setearConsulta("SELECT * FROM V_Medicos_Especialidades ORDER BY 'Nombre Completo Medico' ASC, Especialidad ASC");
                 datos.ejecutarLectura();
-                GridViewMedicos.DataSource = datos.Lector;
+
+                DataTable dt = new DataTable();
+                dt.Load(datos.Lector);
+
+                GridViewMedicos.DataSource = dt;
                 GridViewMedicos.DataBind();
             }
             catch (Exception)
@@ -38,5 +43,10 @@ namespace TPI_DB_II_Grupo13
             }
         }
 
+        protected void GridViewMedicos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewMedicos.PageIndex = e.NewPageIndex;
+            CargarGrilla();
+        }
     }
 }

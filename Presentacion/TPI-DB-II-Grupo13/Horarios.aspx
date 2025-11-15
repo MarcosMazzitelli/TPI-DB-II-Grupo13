@@ -15,7 +15,7 @@
         CssClass="table table-bordered table-striped mt-3">
     </asp:GridView>
 
-    <h4 style="margin-top: 40px">Agregar categoría:</h4>
+    <h4 style="margin-top: 40px">Agregar categoría (Probar SP_Agregar_Horarios_De_Medicos)</h4>
     <div class="container w-100">
         <div class="row">
             <div class="col-md-4">

@@ -25,9 +25,13 @@ namespace TPI_DB_II_Grupo13
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT * FROM V_Pacientes_Turnos");
+                datos.setearConsulta("SELECT * FROM V_Pacientes_Turnos ORDER BY FechaYHora DESC");
                 datos.ejecutarLectura();
-                GridViewTurnos.DataSource = datos.Lector;
+
+                DataTable dt = new DataTable();
+                dt.Load(datos.Lector);
+
+                GridViewTurnos.DataSource = dt;
                 GridViewTurnos.DataBind();
             }
             catch (Exception)
@@ -163,6 +167,12 @@ namespace TPI_DB_II_Grupo13
             datos.setearParametro("@EsSobreTurno", esSobreTurno);
             datos.ejecutarAccion();
 
+        }
+
+        protected void GridViewTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewTurnos.PageIndex = e.NewPageIndex;
+            CargarGrilla();
         }
     }
 }

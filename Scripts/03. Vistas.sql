@@ -21,7 +21,7 @@ INNER JOIN Especialidades E ON EXM.IdEspecialidad = E.IdEspecialidad
 INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario;
 GO
 
--- Horarios completos de los médicos
+-- Horarios completos de los medicos
 CREATE VIEW V_Horarios_Detallados
 AS
 SELECT

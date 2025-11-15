@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -25,7 +26,11 @@ namespace TPI_DB_II_Grupo13
                 // Usamos la VISTA para leer los datos
                 datos.setearConsulta("SELECT * FROM V_Pacientes_Reporte");
                 datos.ejecutarLectura();
-                GridViewReportePacientes.DataSource = datos.Lector;
+                
+                DataTable dt = new DataTable();
+                dt.Load(datos.Lector);
+
+                GridViewReportePacientes.DataSource = dt;
                 GridViewReportePacientes.DataBind();
             }
             catch (Exception)
@@ -36,6 +41,12 @@ namespace TPI_DB_II_Grupo13
             {
                 datos.cerrarConexion();
             }
+        }
+
+        protected void GridViewReportePacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewReportePacientes.PageIndex = e.NewPageIndex;
+            CargarGrilla();
         }
     }
 }

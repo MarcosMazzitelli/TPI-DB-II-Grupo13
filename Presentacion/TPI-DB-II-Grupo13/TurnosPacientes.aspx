@@ -9,13 +9,16 @@
         ID="GridViewTurnos"
         runat="server"
         AutoGenerateColumns="true"
+        AllowPaging="true"
+        PageSize="7"
+        OnPageIndexChanging="GridViewTurnos_PageIndexChanging"
         CssClass="table table-bordered table-striped mt-3">
     </asp:GridView>
     <%--SACAR TURNO--%>
     <div class="col-md-9">
         <div class="card shadow-sm">
             <div class="card-header">
-                <h4 class="mb-0">Registrar Turno (Probar SP)</h4>
+                <h4 class="mb-0">Registrar Turno (Probar SP_Registrar_Turno)</h4>
             </div>
             <div class="card-body">
                 <div class="container w-100">

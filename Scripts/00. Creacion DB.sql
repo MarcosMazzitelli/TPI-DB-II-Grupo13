@@ -58,10 +58,10 @@ RETURNS INT
 AS
 BEGIN
 	DECLARE @edad INT;
-	-- Calcular la diferencia en años entre las dos fechas
+	-- Calcular la diferencia en aÃ±os entre las dos fechas
 	SET @edad = DATEDIFF(YEAR, @fechaNacimiento, @fechaActual);
 
-	--restar un año si la persona aun no ha cumplido años en el año actual
+	--restar un aÃ±o si la persona aun no ha cumplido aÃ±os en el aÃ±o actual
 	IF (MONTH (@fechaActual) < MONTH (@fechaNacimiento) )
 	OR (MONTH (@fechaActual) = MONTH(@fechaNacimiento) ) 
 	AND (DAY (@fechaActual) < DAY(@fechaNacimiento) )

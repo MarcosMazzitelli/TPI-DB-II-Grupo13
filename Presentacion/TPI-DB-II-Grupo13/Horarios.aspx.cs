@@ -49,11 +49,11 @@ namespace TPI_DB_II_Grupo13
                 datos.setearConsulta("SELECT * FROM V_Horarios_Detallados ORDER BY IdDiaSemana ASC, HoraEntrada ASC");
                 datos.ejecutarLectura();
 
-                System.Data.DataTable dt = new System.Data.DataTable();
-                dt.Load(datos.Lector);
+                    DataTable dt = new DataTable();
+                    dt.Load(datos.Lector);
 
-                GridViewHorarios.DataSource = dt;
-                GridViewHorarios.DataBind();
+                    GridViewHorarios.DataSource = dt;
+                    GridViewHorarios.DataBind();
             }
             catch (Exception)
             {
