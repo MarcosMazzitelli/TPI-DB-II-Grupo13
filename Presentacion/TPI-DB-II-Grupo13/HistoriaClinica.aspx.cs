@@ -45,6 +45,8 @@ namespace TPI_DB_II_Grupo13
                     lblNombrePaciente.Text = (string)datos.Lector["NombrePaciente"] + " " + (string)datos.Lector["ApellidoPaciente"];
                     lblDni.Text = (string)datos.Lector["Documento"];
                     lblFechaNacimiento.Text = ((DateTime)datos.Lector["FechaNacimiento"]).ToString("dd/MM/yyyy");
+                    lblEdad.Text = datos.Lector["Edad"].ToString() + " años";
+
 
                     dt.Load(datos.Lector);
                     repeaterHC.DataSource = dt;

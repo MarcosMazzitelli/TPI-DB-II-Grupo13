@@ -9,7 +9,12 @@
         <h1 class="display-5">Historia Clínica de 
        
             <asp:Label ID="lblNombrePaciente" runat="server"></asp:Label>
+            
+            - 
+
+            <asp:Label ID="lblEdad" runat="server"></asp:Label>
         </h1>
+
         <p>
             DNI:
             <asp:Label ID="lblDni" runat="server"></asp:Label>

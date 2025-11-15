@@ -157,6 +157,7 @@ BEGIN
         P.Nombre AS NombrePaciente,
         P.Apellido AS ApellidoPaciente,
 		P.FechaNacimiento AS FechaNacimiento,
+		dbo.CalcularEdad(P.FechaNacimiento, GETDATE()) AS Edad,
 		P.Documento,
         M.Nombre AS NombreMedico,
         M.Apellido AS ApellidoMedico,
