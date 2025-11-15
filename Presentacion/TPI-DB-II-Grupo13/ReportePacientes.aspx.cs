@@ -50,7 +50,7 @@ namespace TPI_DB_II_Grupo13
 
         protected void GridViewReportePacientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string idPaciente = GridViewReportePacientes.SelectedDataKey.Value.ToString();
+            int idPaciente = int.Parse(GridViewReportePacientes.SelectedDataKey.Value.ToString());
 
             Response.Redirect("HistoriaClinica.aspx?idPaciente=" + idPaciente);
 
