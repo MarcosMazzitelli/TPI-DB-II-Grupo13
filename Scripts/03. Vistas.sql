@@ -54,7 +54,8 @@ SELECT
     T.Fecha AS FechaYHora,
     TT.Tipo AS TipoDeTurno,
     T.EsSobreTurno AS EsSobreTurno,
-    ES.Descripcion AS Estado
+    ES.Descripcion AS Estado,
+	T.Observaciones
 FROM Pacientes P
 INNER JOIN Turnos T ON P.IdPaciente = T.IdPaciente
 INNER JOIN Estados ES ON ES.IdEstado = T.IdEstado
