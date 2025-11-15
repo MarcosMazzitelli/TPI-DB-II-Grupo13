@@ -1,6 +1,5 @@
 USE DB_II_TURNOS_CLINICA
 GO
-
 -- Detalle de medicos con sus especialidades
 CREATE VIEW V_Medicos_Especialidades
 AS
@@ -84,4 +83,19 @@ GROUP BY
     P.IdPaciente, P.Nombre, P.Apellido, P.Documento, 
     P.Email, P.Telefono, P.FechaNacimiento;
 GO
-
+--Detalle de medicos con estados
+CREATE VIEW V_Medicos_ConEstado
+AS
+SELECT 
+    M.IdMedico,
+    M.Nombre,
+    M.Apellido,
+    M.Documento,
+    M.FechaNacimiento,
+    M.Email,
+    M.Telefono,
+    M.Matricula,
+    U.Activo AS EstadoUsuario
+FROM Medicos M
+INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario;
+GO

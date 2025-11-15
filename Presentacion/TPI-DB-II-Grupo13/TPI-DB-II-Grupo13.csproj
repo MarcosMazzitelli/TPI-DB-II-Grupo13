@@ -75,6 +75,7 @@
     <Content Include="TurnosPacientes.aspx" />
     <Content Include="Web.config" />
     <Content Include="ReportePacientes.aspx" />
+    <Content Include="UsuariosMedicos.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\AccesoDatos.cs" />
@@ -113,6 +114,13 @@
     </Compile>
     <Compile Include="ReportePacientes.aspx.designer.cs">
       <DependentUpon>ReportePacientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosMedicos.aspx.cs">
+      <DependentUpon>UsuariosMedicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuariosMedicos.aspx.designer.cs">
+      <DependentUpon>UsuariosMedicos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
