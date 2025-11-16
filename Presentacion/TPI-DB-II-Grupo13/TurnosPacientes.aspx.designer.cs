@@ -69,15 +69,6 @@ namespace TPI_DB_II_Grupo13
         protected global::System.Web.UI.WebControls.TextBox txtFecha_Turno;
 
         /// <summary>
-        /// Control txtObservaciones_Turno.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtObservaciones_Turno;
-
-        /// <summary>
         /// Control chkEsSobreTurno_Turno.
         /// </summary>
         /// <remarks>
@@ -85,6 +76,15 @@ namespace TPI_DB_II_Grupo13
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkEsSobreTurno_Turno;
+
+        /// <summary>
+        /// Control txtObservaciones_Turno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObservaciones_Turno;
 
         /// <summary>
         /// Control btnAgregar_Turno.

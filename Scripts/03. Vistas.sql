@@ -52,6 +52,7 @@ SELECT
     M.Apellido AS ApellidoMedico,
     T.Fecha AS FechaYHora,
     TT.Tipo AS TipoDeTurno,
+	T.IdTurno AS IdTurno,
     T.EsSobreTurno AS EsSobreTurno,
     ES.Descripcion AS Estado,
 	T.Observaciones

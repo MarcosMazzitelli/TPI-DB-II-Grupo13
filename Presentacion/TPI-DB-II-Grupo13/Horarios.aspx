@@ -15,40 +15,53 @@
         CssClass="table table-bordered table-striped mt-3">
     </asp:GridView>
 
-    <h4 style="margin-top: 40px">Agregar horario (Probar SP_Agregar_Horarios_De_Medicos)</h4>
-    <div class="container w-100">
-        <div class="row">
-            <div class="col-md-4">
-                <asp:DropDownList ID="ddlMedico" CssClass="form-select" runat="server"></asp:DropDownList>
-            </div>
-            <div class="col-md-4">
-                <asp:DropDownList ID="ddlEspecialidad" CssClass="form-select" runat="server"></asp:DropDownList>
-            </div>
-            <div class="col-md-4">
-                <asp:DropDownList ID="ddlTipoTurno" CssClass="form-select" runat="server"></asp:DropDownList>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <asp:DropDownList ID="ddlDia" CssClass="form-select" runat="server"></asp:DropDownList>
-            </div>
-            <div class="col-md-3">
-                <asp:TextBox ID="txtHoraEntrada" CssClass="form-control" TextMode="Time" runat="server"></asp:TextBox>
-                <div style="min-height: 1.5em;">
-                    <asp:RequiredFieldValidator ErrorMessage="Campo requerido." ForeColor="Red" ControlToValidate="txtHoraEntrada" runat="server" />
-                </div>
-            </div>
-            <div class="col-md-3">
-                <asp:TextBox ID="txtHoraSalida" CssClass="form-control" TextMode="Time" runat="server"></asp:TextBox>
-                <div style="min-height: 1.5em;">
-                    <asp:RequiredFieldValidator ErrorMessage="Campo requerido." ForeColor="Red" ControlToValidate="txtHoraSalida" runat="server" />
-                </div>
-            </div>
-            <div class="col-md-3">
-                <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary w-100" OnClick="btnAgregar_Click" />
-            </div>
-            <asp:Label ID="lblErrorSQL" runat="server" CssClass="errorMessage" ForeColor="Red"></asp:Label>
 
+    <%--SACAR TURNO--%>
+    <div class="card shadow-sm">
+        <div class="card-header text-center">
+
+            <h4 class="mb-0">Agregar horario (Probar SP_Agregar_Horarios_De_Medicos)</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="container w-100">
+                <div class="row">
+                    <div class="col-md-4">
+                        <asp:DropDownList ID="ddlMedico" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-md-4">
+                        <asp:DropDownList ID="ddlEspecialidad" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-md-4">
+                        <asp:DropDownList ID="ddlTipoTurno" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <asp:DropDownList ID="ddlDia" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-md-4">
+                        <asp:TextBox ID="txtHoraEntrada" CssClass="form-control" TextMode="Time" runat="server"></asp:TextBox>
+                        <div style="min-height: 1.5em;">
+                            <asp:RequiredFieldValidator ErrorMessage="Campo requerido." ForeColor="Red" ControlToValidate="txtHoraEntrada" runat="server" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <asp:TextBox ID="txtHoraSalida" CssClass="form-control" TextMode="Time" runat="server"></asp:TextBox>
+                        <div style="min-height: 1.5em;">
+                            <asp:RequiredFieldValidator ErrorMessage="Campo requerido." ForeColor="Red" ControlToValidate="txtHoraSalida" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row justify-content-center text-center mt-3">
+
+                        <div class="col-md-4">
+                            <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary w-100" OnClick="btnAgregar_Click" />
+                        </div>
+                    </div>
+                    <asp:Label ID="lblErrorSQL" runat="server" CssClass="errorMessage" ForeColor="Red"></asp:Label>
+
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

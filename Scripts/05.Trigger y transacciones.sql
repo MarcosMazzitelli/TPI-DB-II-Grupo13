@@ -58,5 +58,10 @@ BEGIN
 		RETURN;
 	END
 
+	UPDATE T 
+	SET Observaciones = 'Turno cancelado' FROM Turnos T
+	INNER JOIN inserted I ON T.IdTurno = I.IdTurno
+	WHERE I.IdEstado = @IdEstadoCancelado
+
 END
 GO

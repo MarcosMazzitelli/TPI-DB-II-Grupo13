@@ -174,5 +174,31 @@ namespace TPI_DB_II_Grupo13
             GridViewTurnos.PageIndex = e.NewPageIndex;
             CargarGrilla();
         }
+
+        protected void GridViewTurnos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int idTurno = int.Parse(GridViewTurnos.SelectedDataKey.Value.ToString());
+            try
+            {
+                datos.setearConsulta("UPDATE Turnos SET IdEstado = (Select IdEstado FROM Estados WHERE Descripcion = 'Cancelado') WHERE IdTurno = @idTurno;");
+                datos.setearParametro("@idTurno", idTurno);
+                datos.ejecutarAccion();
+                CargarGrilla();
+                lblRegistroCorrecto.Text = "Estado de turno cancelado correctamente.";
+                lblRegistroCorrecto.Visible = true;
+                lblErrorSQL_Turnos.Visible = false;
+            }
+            catch (SqlException ex)
+            {
+                lblErrorSQL_Turnos.Text = ex.Message;
+                lblErrorSQL_Turnos.Visible = true;
+                lblRegistroCorrecto.Visible = false;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
