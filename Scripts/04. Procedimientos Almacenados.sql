@@ -102,6 +102,15 @@ BEGIN
 				RETURN;
 			END
 
+			IF (SELECT COUNT (*) FROM Pacientes P
+			INNER JOIN Usuarios U ON P.IdUsuario = U.IdUsuario
+			WHERE IdPaciente = @IdPaciente
+			AND U.Activo = 0) > 0
+			BEGIN
+				RAISERROR('El paciente se encuentra dado de baja.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
 
 
 			-- Validacion que el medico tenga esa especialidad asignada.
