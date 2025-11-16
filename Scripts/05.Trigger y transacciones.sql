@@ -18,7 +18,7 @@ BEGIN
 	UPDATE Turnos
 	SET 
 		IdEstado = @IdEstadoCancelado,
-		Observaciones ='Turno cancelado por baja del medico.'
+		Observaciones ='Turno cancelado'
 	WHERE 
 		IdEspecialidadXMedico IN (SELECT IdEspecialidadXMedico FROM EspecialidadesXMedicos WHERE IdMedico = @IdMedico)
 		AND Fecha > GETDATE()  -- (Solo para turnos futuros y con estado pendiente)
