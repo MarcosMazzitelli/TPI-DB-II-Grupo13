@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="UsuariosMedicos.aspx.cs" Inherits="TPI_DB_II_Grupo13.WebForm2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -12,21 +13,34 @@
         AllowPaging="true"
         PageSize="7"
         OnPageIndexChanging="GridViewMedicosConEstado_PageIndexChanging"
+        OnRowDataBound="GridViewMedicosConEstado_RowDataBound"
         CssClass="table table-bordered table-striped mt-3"
         DataKeyNames="IdMedico"
-        OnSelectedIndexChanged="GridViewMedicosConEstado_SelectedIndexChanged">
+        OnRowCommand="GridViewMedicosConEstado_RowCommand">
         <Columns>
-            <asp:TemplateField>
+            <asp:TemplateField HeaderText="Alta/Baja">
                 <ItemTemplate>
-                 <asp:LinkButton 
-                    ID="btnInactivar"
-                    runat="server"
-                    CommandName="Select"
-                    CssClass="btn btn-outline-danger btn-sm d-flex justify-content-center align-items-center"
-                    ToolTip="Inactivar médico">
-                    <i class="bi bi-trash-fill"></i>
-                </asp:LinkButton>
+                    <asp:LinkButton
+                        ID="btnInactivar"
+                        runat="server"
+                        CommandName="Inactivar"
+                        CommandArgument= '<%# Eval("IdMedico") %>'
+                        CssClass="btn btn-outline-danger"
+                        ToolTip="Inactivar médico">
+                    <i class="bi bi-person-exclamation"></i>
+                    </asp:LinkButton>
+
+                    <asp:LinkButton
+                        ID="btnActivar"
+                        runat="server"
+                        CommandName="Activar"
+                        CommandArgument= '<%# Eval("IdMedico") %>'
+                        CssClass="btn btn-outline-success"
+                        ToolTip="Activar médico">
+                    <i class="bi bi-person-fill-check"></i>
+                    </asp:LinkButton>
                 </ItemTemplate>
+
             </asp:TemplateField>
         </Columns>
     </asp:GridView>

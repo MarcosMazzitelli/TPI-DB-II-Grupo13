@@ -48,7 +48,7 @@ namespace TPI_DB_II_Grupo13
             CargarGrilla();
         }
 
-        protected void GridViewMedicosConEstado_SelectedIndexChanged(object sender, EventArgs e)
+     /*   protected void GridViewMedicosConEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace TPI_DB_II_Grupo13
             {
                 throw;
             }
-        }
+        }*/
 
         protected void inactivarMedico(int IdMedico)
         {
@@ -79,6 +79,62 @@ namespace TPI_DB_II_Grupo13
             {
                 datos.cerrarConexion();
             }
+        }
+        protected void activarMedico(int IdMedico)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE U SET Activo = 1 FROM Usuarios U INNER JOIN Medicos M ON U.IdUsuario = M.IdUsuario WHERE M.IdMedico = @IdMedico");
+                datos.setearParametro("@IdMedico", IdMedico);
+                datos.ejecutarAccion();
+            }
+            catch (SqlException ex)
+            {
+                lblErrorSQL.Text = ex.Message;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        protected void GridViewMedicosConEstado_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int idMedico = Convert.ToInt32(e.CommandArgument);
+            if (e.CommandName == "Activar")
+            {
+                activarMedico(idMedico);
+            }
+            else if (e.CommandName == "Inactivar")
+            {
+                inactivarMedico(idMedico);
+            }
+            CargarGrilla();
+        }
+
+        protected void GridViewMedicosConEstado_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "EstadoUsuario"));
+
+                LinkButton btnActivar = (LinkButton)e.Row.FindControl("btnActivar");
+                LinkButton btnInactivar = (LinkButton)e.Row.FindControl("btnInactivar");
+
+                if (activo)
+                {
+                    btnActivar.Visible = false;
+                    btnInactivar.Visible = true;
+                }
+                else
+                {
+                    btnActivar.Visible = true;
+                    btnInactivar.Visible = false;
+                }
+            }
+
         }
     }
 }
