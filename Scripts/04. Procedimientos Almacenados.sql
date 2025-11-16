@@ -27,7 +27,7 @@ BEGIN
         END 
 
         IF @HoraEntrada >= @HoraSalida BEGIN
-            RAISERROR('No puede haber un turno con duracion menor o igual a 0.', 16, 1);
+            RAISERROR('No puede haber un horario con duracion menor o igual a 0.', 16, 1);
         END 
         
 
@@ -48,6 +48,15 @@ BEGIN
         BEGIN
             RAISERROR('El horario seleccionado interfiere con otro horario establecido.', 16, 1);
         END
+
+		IF (SELECT COUNT (*) FROM EspecialidadesXMedicos EXM
+			INNER JOIN Medicos M ON EXM.IdMedico = M.IdMedico
+			INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario
+			WHERE IdEspecialidadXMedico = @IdEspecialidadXMedico
+			AND U.Activo = 0 ) > 0
+		BEGIN
+			RAISERROR('El medico se encuentra dado de baja.' , 16, 1)
+		END
 
        INSERT INTO HorariosDeMedicos (IdEspecialidadXMedico, IdTipoTurno, IdDiaSemana, HoraEntrada, HoraSalida) 
                             VALUES (@IdEspecialidadXMedico, @IdTipoTurno, @IdDiaSemana, @HoraEntrada, @HoraSalida)
@@ -93,6 +102,8 @@ BEGIN
 				RETURN;
 			END
 
+
+
 			-- Validacion que el medico tenga esa especialidad asignada.
 			IF (SELECT COUNT (*) FROM EspecialidadesXMedicos WHERE IdEspecialidadXMedico = @IdEspecialidadXMedico) = 0
 			BEGIN
@@ -104,6 +115,18 @@ BEGIN
             IF @Fecha <= GETDATE()
 			BEGIN
 				RAISERROR('No se puede registrar un turno en el pasado.', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+
+			-- Validacion medico dado de baja.
+			IF (SELECT COUNT (*) FROM EspecialidadesXMedicos EXM
+			INNER JOIN Medicos M ON EXM.IdMedico = M.IdMedico
+			INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario
+			WHERE IdEspecialidadXMedico = 5
+			AND U.Activo = 0) > 0
+			BEGIN
+				RAISERROR('El medico se encuentra dado de baja', 16, 1);
 				ROLLBACK TRANSACTION;
 				RETURN;
 			END
