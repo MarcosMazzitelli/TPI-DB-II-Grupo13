@@ -17,7 +17,7 @@ BEGIN
 	  -- Actualizamos los estados de los turnos pendientes futuros de este medico a Cancelado
 	UPDATE Turnos
 	SET 
-		IdEstado = @IdEstadoCancelado,
+		IdEstado = @IdEstadoCancelado
 	WHERE 
 		IdEspecialidadXMedico IN (SELECT IdEspecialidadXMedico FROM EspecialidadesXMedicos WHERE IdMedico = @IdMedico)
 		AND Fecha > GETDATE()  -- (Solo para turnos futuros y con estado pendiente)

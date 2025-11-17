@@ -222,4 +222,3 @@ INSERT INTO HistoriasClinicas (Fecha, IdPaciente, IdEspecialidadXMedico, Descrip
 ('2024-10-25 15:00:00', 14, 10, 'OK.'),
 ('2024-10-25 16:00:00', 18, 10, 'OK.');
 GO
-

@@ -129,4 +129,3 @@ CREATE TABLE HistoriasClinicas (
     Descripcion VARCHAR(255) NOT NULL
 )
 GO
-
