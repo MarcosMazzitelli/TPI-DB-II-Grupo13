@@ -162,7 +162,8 @@ BEGIN
 			IF (SELECT COUNT (*) FROM Turnos T 
 				WHERE T.IdEspecialidadXMedico = @IdEspecialidadXMedico
 				  AND T.Fecha BETWEEN @FechaInicioRango AND @FechaFinRango
-				  AND T.IdEstado NOT IN (@IdEstadoCancelado, @IdEstadoAtendido) ) > 0
+				  AND T.IdEstado NOT IN (@IdEstadoCancelado, @IdEstadoAtendido) 
+				  AND @EsSobreTurno = 0) > 0
 			BEGIN
 				RAISERROR('El medico ya tiene un turno asignado en esa fecha y hora.', 16, 1);
 				ROLLBACK TRANSACTION;
