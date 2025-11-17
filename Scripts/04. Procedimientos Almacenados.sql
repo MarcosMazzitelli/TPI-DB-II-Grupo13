@@ -132,14 +132,13 @@ BEGIN
 			IF (SELECT COUNT (*) FROM EspecialidadesXMedicos EXM
 			INNER JOIN Medicos M ON EXM.IdMedico = M.IdMedico
 			INNER JOIN Usuarios U ON M.IdUsuario = U.IdUsuario
-			WHERE IdEspecialidadXMedico = 5
+			WHERE IdEspecialidadXMedico = @IdEspecialidadXMedico
 			AND U.Activo = 0) > 0
 			BEGIN
 				RAISERROR('El medico se encuentra dado de baja', 16, 1);
 				ROLLBACK TRANSACTION;
 				RETURN;
 			END
-
 			-- Validacion que el medico tenga esa fecha y horario asignado con esa especialidad y ese tipo de turno
 			SET DATEFIRST 1;  -- para que el weekday 1 sea lunes.
 			IF (SELECT COUNT (*) FROM HorariosDeMedicos H 
@@ -158,7 +157,7 @@ BEGIN
 			DECLARE @FechaInicioRango DATETIME = DATEADD(MINUTE, -29, @Fecha); --  29 min antes que comience el nuevo turno
 			DECLARE @FechaFinRango DATETIME = DATEADD(MINUTE, 29, @Fecha);     --  29  min despues del nuevo turno
 			SET @IdEstadoCancelado = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Cancelado');
-			SET @IdEstadoAtendido = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Atendido');
+			SET @IdEstadoAtendido = (SELECT IdEstado FROM Estados WHERE Descripcion = 'Completado');
 
 			IF (SELECT COUNT (*) FROM Turnos T 
 				WHERE T.IdEspecialidadXMedico = @IdEspecialidadXMedico

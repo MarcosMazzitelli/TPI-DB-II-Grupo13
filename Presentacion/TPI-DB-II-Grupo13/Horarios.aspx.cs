@@ -46,7 +46,7 @@ namespace TPI_DB_II_Grupo13
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT * FROM V_Horarios_Detallados ORDER BY IdDiaSemana ASC, HoraEntrada ASC");
+                datos.setearConsulta("SELECT * FROM V_Horarios_Detallados ORDER BY 'Nombre Completo Medico' ASC, HoraEntrada ASC");
                 datos.ejecutarLectura();
 
                 DataTable dt = new DataTable();

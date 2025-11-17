@@ -23,7 +23,7 @@
                         runat="server"
                         CommandName="Select"
                         CssClass="btn btn-outline-danger btn-sm d-flex justify-content-center align-items-center"
-                        ToolTip="Inactivar médico">
+                        ToolTip="Cancelar turno">
                         <i class="bi bi-x-circle-fill"></i>
                     </asp:LinkButton>
                 </ItemTemplate>
